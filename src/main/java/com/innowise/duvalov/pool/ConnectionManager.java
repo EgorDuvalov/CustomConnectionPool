@@ -1,4 +1,6 @@
-package com.innowise.duvalov.СustomConnection;
+package com.innowise.duvalov.pool;
+
+import com.innowise.duvalov.util.PropertyHelper;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

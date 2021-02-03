@@ -1,4 +1,4 @@
-package com.innowise.duvalov.СustomConnection;
+package com.innowise.duvalov.pool;
 
 import java.sql.SQLException;
 import java.util.LinkedList;

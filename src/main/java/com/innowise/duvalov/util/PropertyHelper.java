@@ -1,4 +1,4 @@
-package com.innowise.duvalov.СustomConnection;
+package com.innowise.duvalov.util;
 
 import java.io.IOException;
 import java.util.Properties;
