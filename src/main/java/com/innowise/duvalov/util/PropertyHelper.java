@@ -1,9 +1,14 @@
 package com.innowise.duvalov.util;
 
+import com.innowise.duvalov.pool.ConnectionPool;
+import org.apache.log4j.Logger;
+
 import java.io.IOException;
 import java.util.Properties;
 
 public final class PropertyHelper {
+    private static final Logger LOGGER = Logger.getLogger(PropertyHelper.class);
+
     private static final Properties PROPERTIES = new Properties();
 
     static {
@@ -20,7 +25,7 @@ public final class PropertyHelper {
                 getResourceAsStream("application.properties")) {
             PROPERTIES.load(inputStream);
         } catch (IOException e) {
-            throw new RuntimeException(e); // Application falls if file is not found
+            LOGGER.error(e);
         }
     }
 }
