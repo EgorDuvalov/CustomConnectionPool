@@ -28,11 +28,7 @@ public enum ConnectionPool {
     public void createPool() {
         if (!isCreated.get()) {
             for (int i = 0; i < DEFAULT_POOL_SIZE; i++) {
-                try {
-                    availableConnection.add(ConnectionManager.getProxyConnection());
-                } catch (SQLException throwables) {
-                    LOGGER.error(throwables);
-                }
+                availableConnection.add(ConnectionManager.getProxyConnection());
             }
             isCreated.set(true);
         }
@@ -59,16 +55,21 @@ public enum ConnectionPool {
         }
     }
 
-    public void clearPool() throws SQLException {
+    public void clearPool() {
         if (!takenConnections.isEmpty()) {
             LOGGER.warn("Some connections weren't released before cleaning");
             for (ProxyConnection connection : takenConnections) {
                 releaseConnection(connection);
             }
         }
-        for (ProxyConnection connection : availableConnection) {
-            connection.close();
+        try {
+            for (ProxyConnection connection : availableConnection) {
+                connection.close();
+            }
+        } catch (SQLException throwables) {
+            LOGGER.error(throwables);
         }
         isCreated.set(false);
     }
 }
+
